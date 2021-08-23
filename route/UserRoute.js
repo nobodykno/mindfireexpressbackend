@@ -1,5 +1,14 @@
-const router = require("express").Router();
-const userController = require("../controller/UserController");
+/* eslint-disable linebreak-style */
+/* eslint-disable consistent-return */
+/* eslint-disable max-len */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable linebreak-style */
+
+const router = require('express').Router();
+
+const userController = require('../controller/UserController');
+
+const auth = require('../controller/AuthController');
 
 /**
 * @swagger
@@ -47,7 +56,7 @@ const userController = require("../controller/UserController");
 
 */
 
-router.post("/", userController.register);
+router.post('/', userController.register);
 /**
 * @swagger
 * /v1/api/user/:id:
@@ -67,14 +76,14 @@ router.post("/", userController.register);
 *           - id
 *     produces:
 *       - application/json
-*    
+*
 *     responses:
 *       201:
 *         description: User deleted Successfully
 *       401:
 *         description: User not deleted Successfully
 */
-router.delete("/:id", userController.deleteUser);
+router.delete('/:id', auth.AuthorizeRequest, userController.deleteUser);
 /**
 * @swagger
 * /v1/api/user:
@@ -122,7 +131,7 @@ router.delete("/:id", userController.deleteUser);
 *         description: Bad request
 
 */
-router.put("/:id", userController.editUser);
+router.put('/:id', userController.editUser);
 /**
 * @swagger
 * /v1/api/user/:id:
@@ -142,15 +151,15 @@ router.put("/:id", userController.editUser);
 *           - id
 *     produces:
 *       - application/json
-*    
+*
 *     responses:
 *       201:
 *         description: User detail fetched successfully
 *       401:
-*         description: User not fetched 
+*         description: User not fetched
 */
 
-router.get("/:id", userController.detailUser);
+router.get('/:id', auth.AuthorizeRequest, userController.detailUser);
 /**
 * @swagger
 * /v1/api/user:
@@ -163,13 +172,13 @@ router.get("/:id", userController.detailUser);
 *       - application/json
 *     produces:
 *       - application/json
-*    
+*
 *     responses:
 *       201:
 *         description: Users list fetched Successfully
 *       401:
 *         description: Users not fetchd successfully
 */
- 
-router.get('/',userController.allUser);
+
+router.get('/', auth.AuthorizeRequest, userController.allUser);
 module.exports = router;

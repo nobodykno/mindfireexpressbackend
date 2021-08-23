@@ -3,10 +3,9 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable linebreak-style */
-const express = require('express');
+const router = require('express').Router();
+const auth = require('../controller/AuthController');
 
-const app = express();
-app.use('/api/user', require('./UserRoute'));
-app.use('api/auth', require('./AuthRoute'));
+router.post('/', auth.login);
 
-module.exports = app;
+module.exports = router;
